@@ -25,6 +25,10 @@ const bookSchema = new Schema<IBook, BookModel>({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
 });
 
 export const Book = model<IBook, BookModel>('Book', bookSchema);
