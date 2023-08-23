@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import { Server } from "http";
-import mongoose from "mongoose";
-import app from "./app";
-import config from "./config/index";
+import { Server } from 'http';
+import mongoose from 'mongoose';
+import app from './app';
+import config from './config/index';
 
-process.on("uncaughtException", (error) => {
+process.on('uncaughtException', error => {
   console.error(error);
   process.exit(1);
 });
@@ -16,14 +16,14 @@ async function bootstrap() {
     await mongoose.connect(config.database_url as string);
     console.log(`Database is connected successfully`);
 
-    server = app.listen(config.port, () => {
-      console.log(`Application  listening on port ${config.port}`);
+    server = app.listen(config.PORT, () => {
+      console.log(`Application  listening on port ${config.PORT}`);
     });
   } catch (err) {
-    console.error("Failed to connect database", err);
+    console.error('Failed to connect database', err);
   }
 
-  process.on("unhandledRejection", (error) => {
+  process.on('unhandledRejection', error => {
     if (server) {
       server.close(() => {
         console.error(error);

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
 const index_1 = __importDefault(require("./config/index"));
-process.on("uncaughtException", (error) => {
+process.on('uncaughtException', error => {
     console.error(error);
     process.exit(1);
 });
@@ -25,14 +25,14 @@ function bootstrap() {
         try {
             yield mongoose_1.default.connect(index_1.default.database_url);
             console.log(`Database is connected successfully`);
-            server = app_1.default.listen(index_1.default.port, () => {
-                console.log(`Application  listening on port ${index_1.default.port}`);
+            server = app_1.default.listen(index_1.default.PORT, () => {
+                console.log(`Application  listening on port ${index_1.default.PORT}`);
             });
         }
         catch (err) {
-            console.error("Failed to connect database", err);
+            console.error('Failed to connect database', err);
         }
-        process.on("unhandledRejection", (error) => {
+        process.on('unhandledRejection', error => {
             if (server) {
                 server.close(() => {
                     console.error(error);
