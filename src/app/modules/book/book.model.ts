@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { BookModel, IBook } from "./book.interface";
+import { Schema, model } from 'mongoose';
+import { BookModel, IBook } from './book.interface';
 
 const bookSchema = new Schema<IBook, BookModel>({
   title: {
@@ -21,6 +21,10 @@ const bookSchema = new Schema<IBook, BookModel>({
   reviews: {
     type: [String],
   },
+  email: {
+    type: String,
+    required: true,
+  },
 });
 
-export const Book = model<IBook, BookModel>("Book", bookSchema);
+export const Book = model<IBook, BookModel>('Book', bookSchema);

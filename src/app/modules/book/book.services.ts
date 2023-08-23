@@ -1,13 +1,42 @@
-import { IBook } from "./book.interface";
-import { Book } from "./book.model";
+import { FilterQuery } from 'mongoose';
+import { bookSearchableFields } from './book.constant';
+import { IBook, IBookFilters } from './book.interface';
+import { Book } from './book.model';
 
 const createBook = async (book: IBook): Promise<IBook> => {
   const createdBook = Book.create(book);
   return createdBook;
 };
 
-const getAllBooks = async (): Promise<IBook[]> => {
-  const books = Book.find();
+const getAllBooks = async (filters: IBookFilters): Promise<IBook[]> => {
+  const { searchTerm, ...filtersData } = filters;
+
+  const andConditions: FilterQuery<IBook>[] = [];
+
+  if (searchTerm) {
+    andConditions.push({
+      $or: bookSearchableFields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    });
+  }
+
+  // Filters needs $and to fullfill all the conditions
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
+
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {};
+
+  const books = Book.find(whereConditions);
   return books;
 };
 
