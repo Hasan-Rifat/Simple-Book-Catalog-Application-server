@@ -5,7 +5,7 @@ import validateRequest from '../../middleware/handleCastError';
 
 const router = express.Router();
 
-// router.get('/', UserController.getAllUser);
+router.get('/', UserController.getAllUser);
 
 router.post(
   '/login',
@@ -19,13 +19,13 @@ router.post(
   UserController.createUser
 );
 
-/* router.get('/:id', UserController.getSingleUser);
+router.get('/:id', UserController.getSingleUser);
 
 router.patch(
   '/:id',
   validateRequest(UserValidation.updateUserZodSchema),
   UserController.updateUser
 );
-router.delete('/:id', UserController.deleteUser); */
+router.delete('/:id', UserController.deleteUser);
 
 export const UserRoutes = router;

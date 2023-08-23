@@ -4,7 +4,7 @@ import sendResponse from '../../../shared/sendResponse';
 import { BookService } from './book.services';
 import { IBook } from './book.interface';
 import pick from '../../../shared/pick';
-import { BookFilterableFields } from './book.constant';
+import { BookSearchableFields } from './book.constant';
 
 const createBook = catchAsync(async (req, res) => {
   const result = await BookService.createBook(req.body);
@@ -18,7 +18,7 @@ const createBook = catchAsync(async (req, res) => {
 });
 
 const getAllBooks = catchAsync(async (req, res) => {
-  const filters = pick(req.query, BookFilterableFields);
+  const filters = pick(req.query, BookSearchableFields);
   const result = await BookService.getAllBooks(filters);
 
   sendResponse<IBook[]>(res, {
@@ -41,9 +41,9 @@ const getSingleBook = catchAsync(async (req, res) => {
 });
 
 const updateBook = catchAsync(async (req, res) => {
-  const result = await BookService.updateBook(req.params.id, req.body);
+  const result = await BookService.updateBook(req.params.email, req.body);
 
-  sendResponse<IBook>(res, {
+  sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Book updated successfully',
@@ -54,7 +54,7 @@ const updateBook = catchAsync(async (req, res) => {
 const deleteBook = catchAsync(async (req, res) => {
   const result = await BookService.deleteBook(req.params.id);
 
-  sendResponse<IBook>(res, {
+  sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Book deleted successfully',

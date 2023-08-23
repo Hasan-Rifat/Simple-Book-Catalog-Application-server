@@ -1,9 +1,17 @@
-import { FilterQuery } from 'mongoose';
-import { bookSearchableFields } from './book.constant';
+import mongoose, { FilterQuery, UpdateWriteOpResult } from 'mongoose';
 import { IBook, IBookFilters } from './book.interface';
 import { Book } from './book.model';
+import { BookSearchableFields } from './book.constant';
+import ApiError from '../../../errors/ApiError';
+import httpStatus from 'http-status';
 
 const createBook = async (book: IBook): Promise<IBook> => {
+  if (!book.title || !book.author) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      'Title and author are required.'
+    );
+  }
   const createdBook = Book.create(book);
   return createdBook;
 };
@@ -15,7 +23,7 @@ const getAllBooks = async (filters: IBookFilters): Promise<IBook[]> => {
 
   if (searchTerm) {
     andConditions.push({
-      $or: bookSearchableFields.map(field => ({
+      $or: BookSearchableFields.map(field => ({
         [field]: {
           $regex: searchTerm,
           $options: 'i',
@@ -41,19 +49,32 @@ const getAllBooks = async (filters: IBookFilters): Promise<IBook[]> => {
 };
 
 const getSingleBook = async (id: string): Promise<IBook | null> => {
+  if (!mongoose.isValidObjectId(id)) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Invalid book ID.');
+  }
   const book = Book.findById(id);
   return book;
 };
 
 const updateBook = async (
-  id: string,
+  email: string,
   payload: IBook
-): Promise<IBook | null> => {
-  const book = Book.findByIdAndUpdate(id, payload, { new: true });
+): Promise<UpdateWriteOpResult> => {
+  const book = Book.updateOne(
+    { email },
+    {
+      $set: payload,
+    },
+    { new: true }
+  );
+
   return book;
 };
 
 const deleteBook = async (id: string): Promise<IBook | null> => {
+  if (!mongoose.isValidObjectId(id)) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Invalid book ID.');
+  }
   const book = Book.findByIdAndDelete(id);
   return book;
 };

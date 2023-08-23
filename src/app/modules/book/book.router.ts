@@ -14,7 +14,7 @@ router.post(
 router.get('/:id', BookController.getSingleBook);
 
 router.patch(
-  '/:id',
+  '/:email',
   validateRequest(BookValidation.updateBookZodSchema),
   BookController.updateBook
 );
