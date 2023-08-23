@@ -11,17 +11,17 @@ const createUser = async (payload: IUser): Promise<IUser> => {
     throw new ApiError(httpStatus.CONFLICT, 'User already exist');
   }
 
-  const createdBook = User.create(payload);
+  const createdBook = await User.create(payload);
   return createdBook;
 };
 
 const getAllUser = async (): Promise<IUser[]> => {
-  const books = User.find();
+  const books = await User.find();
   return books;
 };
 
 const getSingleUser = async (id: string): Promise<IUser | null> => {
-  const book = User.findById(id);
+  const book = await User.findById(id);
   return book;
 };
 
@@ -29,12 +29,12 @@ const updateUser = async (
   id: string,
   payload: IUser
 ): Promise<IUser | null> => {
-  const book = User.findByIdAndUpdate(id, payload, { new: true });
+  const book = await User.findByIdAndUpdate(id, payload, { new: true });
   return book;
 };
 
 const deleteUser = async (id: string): Promise<IUser | null> => {
-  const book = User.findByIdAndDelete(id);
+  const book = await User.findByIdAndDelete(id);
   return book;
 };
 

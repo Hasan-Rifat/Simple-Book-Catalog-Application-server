@@ -12,7 +12,7 @@ const createBook = async (book: IBook): Promise<IBook> => {
       'Title and author are required.'
     );
   }
-  const createdBook = Book.create(book);
+  const createdBook = await Book.create(book);
   return createdBook;
 };
 
@@ -44,7 +44,7 @@ const getAllBooks = async (filters: IBookFilters): Promise<IBook[]> => {
   const whereConditions =
     andConditions.length > 0 ? { $and: andConditions } : {};
 
-  const books = Book.find(whereConditions);
+  const books = await Book.find(whereConditions);
   return books;
 };
 
@@ -52,7 +52,7 @@ const getSingleBook = async (id: string): Promise<IBook | null> => {
   if (!mongoose.isValidObjectId(id)) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Invalid book ID.');
   }
-  const book = Book.findById(id);
+  const book = await Book.findById(id);
   return book;
 };
 
@@ -60,7 +60,7 @@ const updateBook = async (
   email: string,
   payload: IBook
 ): Promise<UpdateWriteOpResult> => {
-  const book = Book.updateOne(
+  const book = await Book.updateOne(
     { email },
     {
       $set: payload,
@@ -75,7 +75,7 @@ const deleteBook = async (id: string): Promise<IBook | null> => {
   if (!mongoose.isValidObjectId(id)) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Invalid book ID.');
   }
-  const book = Book.findByIdAndDelete(id);
+  const book = await Book.findByIdAndDelete(id);
   return book;
 };
 
