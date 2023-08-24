@@ -35,6 +35,15 @@ const getAllWishList = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
         data: result,
     });
 }));
+const getWishListByEmail = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield wishList_services_1.WishListService.getWishListByEmail(req.params.email);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'WishList fetched successfully',
+        data: result,
+    });
+}));
 const getSingleWishList = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield wishList_services_1.WishListService.getSingleWishList(req.params.id);
     (0, sendResponse_1.default)(res, {
@@ -68,4 +77,5 @@ exports.WishListController = {
     getSingleWishList,
     updateWishList,
     deleteWishList,
+    getWishListByEmail,
 };

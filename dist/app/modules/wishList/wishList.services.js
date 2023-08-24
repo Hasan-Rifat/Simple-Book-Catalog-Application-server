@@ -19,6 +19,10 @@ const getAllWishList = () => __awaiter(void 0, void 0, void 0, function* () {
     const books = yield wishList_model_1.WishList.find().populate('bookId');
     return books;
 });
+const getWishListByEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    const books = yield wishList_model_1.WishList.find({ email }).populate('bookId');
+    return books;
+});
 const getSingleWishList = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const book = yield wishList_model_1.WishList.findById(id).populate('bookId');
     return book;
@@ -42,4 +46,5 @@ exports.WishListService = {
     getSingleWishList,
     updateWishList,
     deleteWishList,
+    getWishListByEmail,
 };

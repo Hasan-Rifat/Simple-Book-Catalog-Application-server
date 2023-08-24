@@ -11,6 +11,7 @@ const readingList_controller_1 = require("./readingList.controller");
 const router = express_1.default.Router();
 router.get('/', readingList_controller_1.ReadingListController.getAllReadingList);
 router.post('/', (0, handleCastError_1.default)(readingList_validation_1.RedingListValidation.createRedingListZodSchema), readingList_controller_1.ReadingListController.createReadingList);
+router.get('/:email', readingList_controller_1.ReadingListController.getReadingListByEmail);
 router.get('/:id', readingList_controller_1.ReadingListController.getSingleReadingList);
 router.patch('/:email', (0, handleCastError_1.default)(readingList_validation_1.RedingListValidation.updateRedingListZodSchema), readingList_controller_1.ReadingListController.updateReadingList);
 router.delete('/:id', readingList_controller_1.ReadingListController.deleteReadingList);

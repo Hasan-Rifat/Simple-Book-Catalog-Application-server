@@ -11,6 +11,7 @@ const wishList_validation_1 = require("./wishList.validation");
 const router = express_1.default.Router();
 router.get('/', wishList_controller_1.WishListController.getAllWishList);
 router.post('/', (0, handleCastError_1.default)(wishList_validation_1.WishListValidation.createWishListZodSchema), wishList_controller_1.WishListController.createWishList);
+router.get('/:email', wishList_controller_1.WishListController.getWishListByEmail);
 router.get('/:id', wishList_controller_1.WishListController.getSingleWishList);
 router.patch('/:email', (0, handleCastError_1.default)(wishList_validation_1.WishListValidation.updateWishListZodSchema), wishList_controller_1.WishListController.updateWishList);
 router.delete('/:id', wishList_controller_1.WishListController.deleteWishList);

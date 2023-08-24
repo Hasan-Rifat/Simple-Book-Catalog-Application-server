@@ -19,6 +19,10 @@ const getAllReadingList = () => __awaiter(void 0, void 0, void 0, function* () {
     const books = yield readingList_model_1.ReadingList.find().populate('bookId');
     return books;
 });
+const getReadingListByEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    const books = yield readingList_model_1.ReadingList.find({ email }).populate('bookId');
+    return books;
+});
 const getSingleReadingList = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const book = yield readingList_model_1.ReadingList.findById(id).populate('bookId');
     return book;
@@ -42,4 +46,5 @@ exports.ReadingListService = {
     getSingleReadingList,
     updateReadingList,
     deleteReadingList,
+    getReadingListByEmail,
 };
