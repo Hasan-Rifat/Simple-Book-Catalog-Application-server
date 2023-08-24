@@ -51,7 +51,7 @@ const getSingleReadingList = catchAsync(async (req, res) => {
 
 const updateReadingList = catchAsync(async (req, res) => {
   const result = await ReadingListService.updateReadingList(
-    req.params.email,
+    req.params.id,
     req.body
   );
 

@@ -16,7 +16,7 @@ router.get('/:email', ReadingListController.getReadingListByEmail);
 router.get('/:id', ReadingListController.getSingleReadingList);
 
 router.patch(
-  '/:email',
+  '/:id',
   validateRequest(RedingListValidation.updateRedingListZodSchema),
   ReadingListController.updateReadingList
 );

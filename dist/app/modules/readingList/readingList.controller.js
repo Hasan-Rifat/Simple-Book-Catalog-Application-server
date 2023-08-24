@@ -54,7 +54,7 @@ const getSingleReadingList = (0, catchAsync_1.default)((req, res) => __awaiter(v
     });
 }));
 const updateReadingList = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield readingList_services_1.ReadingListService.updateReadingList(req.params.email, req.body);
+    const result = yield readingList_services_1.ReadingListService.updateReadingList(req.params.id, req.body);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,

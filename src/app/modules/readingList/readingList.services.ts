@@ -29,15 +29,17 @@ const getSingleReadingList = async (
 };
 
 const updateReadingList = async (email: string, payload: IReadingList) => {
-  const book = await ReadingList.updateOne(
-    { email },
+  const id = payload.bookId;
+
+  // Use findOneAndUpdate to find and update the document.
+  const book = await ReadingList.findOneAndUpdate(
+    { email, bookId: id }, // Filter based on email and bookId
+    payload, // Update payload
     {
-      $set: payload,
-    },
-    {
-      new: true,
+      new: true, // To return the updated document
     }
-  ).populate('bookId');
+  ).populate('bookId'); // Populate the 'bookId' field in the updated document
+
   return book;
 };
 
