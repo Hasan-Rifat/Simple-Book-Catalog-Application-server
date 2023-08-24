@@ -12,9 +12,9 @@ router.post(
   validateRequest(WishListValidation.createWishListZodSchema),
   WishListController.createWishList
 );
-
-router.get('/:id', WishListController.getSingleWishList);
 router.get('/:email', WishListController.getWishListByEmail);
+router.get('/:id', WishListController.getSingleWishList);
+
 router.patch(
   '/:email',
   validateRequest(WishListValidation.updateWishListZodSchema),
