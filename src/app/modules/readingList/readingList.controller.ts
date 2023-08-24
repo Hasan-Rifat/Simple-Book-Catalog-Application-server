@@ -25,6 +25,18 @@ const getAllReadingList = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getReadingListByEmail = catchAsync(async (req, res) => {
+  const result = await ReadingListService.getReadingListByEmail(
+    req.params.email
+  );
+
+  sendResponse<IReadingList[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'ReadingLists fetched successfully',
+    data: result,
+  });
+});
 
 const getSingleReadingList = catchAsync(async (req, res) => {
   const result = await ReadingListService.getSingleReadingList(req.params.id);
@@ -68,4 +80,5 @@ export const ReadingListController = {
   getSingleReadingList,
   updateReadingList,
   deleteReadingList,
+  getReadingListByEmail,
 };

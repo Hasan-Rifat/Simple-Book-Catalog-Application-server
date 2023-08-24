@@ -26,6 +26,17 @@ const getAllWishList = catchAsync(async (req, res) => {
   });
 });
 
+const getWishListByEmail = catchAsync(async (req, res) => {
+  const result = await WishListService.getWishListByEmail(req.params.email);
+
+  sendResponse<IWishList[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'WishList fetched successfully',
+    data: result,
+  });
+});
+
 const getSingleWishList = catchAsync(async (req, res) => {
   const result = await WishListService.getSingleWishList(req.params.id);
 
@@ -68,4 +79,5 @@ export const WishListController = {
   getSingleWishList,
   updateWishList,
   deleteWishList,
+  getWishListByEmail,
 };

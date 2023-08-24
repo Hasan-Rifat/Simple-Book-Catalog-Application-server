@@ -14,6 +14,13 @@ const getAllReadingList = async (): Promise<IReadingList[]> => {
   return books;
 };
 
+const getReadingListByEmail = async (
+  email: string
+): Promise<IReadingList[]> => {
+  const books = await ReadingList.find({ email }).populate('bookId');
+  return books;
+};
+
 const getSingleReadingList = async (
   id: string
 ): Promise<IReadingList | null> => {
@@ -46,4 +53,5 @@ export const ReadingListService = {
   getSingleReadingList,
   updateReadingList,
   deleteReadingList,
+  getReadingListByEmail,
 };

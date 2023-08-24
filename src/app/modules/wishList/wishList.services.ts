@@ -10,6 +10,11 @@ const getAllWishList = async (): Promise<IWishList[]> => {
   return books;
 };
 
+const getWishListByEmail = async (email: string): Promise<IWishList[]> => {
+  const books = await WishList.find({ email }).populate('bookId');
+  return books;
+};
+
 const getSingleWishList = async (id: string): Promise<IWishList | null> => {
   const book = await WishList.findById(id).populate('bookId');
   return book;
@@ -40,4 +45,5 @@ export const WishListService = {
   getSingleWishList,
   updateWishList,
   deleteWishList,
+  getWishListByEmail,
 };

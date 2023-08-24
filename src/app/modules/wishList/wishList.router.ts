@@ -14,7 +14,7 @@ router.post(
 );
 
 router.get('/:id', WishListController.getSingleWishList);
-
+router.get('/:email', WishListController.getWishListByEmail);
 router.patch(
   '/:email',
   validateRequest(WishListValidation.updateWishListZodSchema),
