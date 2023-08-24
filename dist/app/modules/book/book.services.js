@@ -33,7 +33,7 @@ const createBook = (book) => __awaiter(void 0, void 0, void 0, function* () {
     if (!book.title || !book.author) {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'Title and author are required.');
     }
-    const createdBook = book_model_1.Book.create(book);
+    const createdBook = yield book_model_1.Book.create(book);
     return createdBook;
 });
 const getAllBooks = (filters) => __awaiter(void 0, void 0, void 0, function* () {
@@ -58,18 +58,18 @@ const getAllBooks = (filters) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
     const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
-    const books = book_model_1.Book.find(whereConditions);
+    const books = yield book_model_1.Book.find(whereConditions);
     return books;
 });
 const getSingleBook = (id) => __awaiter(void 0, void 0, void 0, function* () {
     if (!mongoose_1.default.isValidObjectId(id)) {
         throw new ApiError_1.default(http_status_1.default.FORBIDDEN, 'Invalid book ID.');
     }
-    const book = book_model_1.Book.findById(id);
+    const book = yield book_model_1.Book.findById(id);
     return book;
 });
 const updateBook = (email, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const book = book_model_1.Book.updateOne({ email }, {
+    const book = yield book_model_1.Book.updateOne({ email }, {
         $set: payload,
     }, { new: true });
     return book;
@@ -78,7 +78,7 @@ const deleteBook = (id) => __awaiter(void 0, void 0, void 0, function* () {
     if (!mongoose_1.default.isValidObjectId(id)) {
         throw new ApiError_1.default(http_status_1.default.FORBIDDEN, 'Invalid book ID.');
     }
-    const book = book_model_1.Book.findByIdAndDelete(id);
+    const book = yield book_model_1.Book.findByIdAndDelete(id);
     return book;
 });
 exports.BookService = {

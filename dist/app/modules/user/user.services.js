@@ -22,23 +22,23 @@ const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     if (isUserExist) {
         throw new ApiError_1.default(http_status_1.default.CONFLICT, 'User already exist');
     }
-    const createdBook = user_model_1.User.create(payload);
+    const createdBook = yield user_model_1.User.create(payload);
     return createdBook;
 });
 const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
-    const books = user_model_1.User.find();
+    const books = yield user_model_1.User.find();
     return books;
 });
 const getSingleUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const book = user_model_1.User.findById(id);
+    const book = yield user_model_1.User.findById(id);
     return book;
 });
 const updateUser = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const book = user_model_1.User.findByIdAndUpdate(id, payload, { new: true });
+    const book = yield user_model_1.User.findByIdAndUpdate(id, payload, { new: true });
     return book;
 });
 const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const book = user_model_1.User.findByIdAndDelete(id);
+    const book = yield user_model_1.User.findByIdAndDelete(id);
     return book;
 });
 const userLogin = (payload) => __awaiter(void 0, void 0, void 0, function* () {
