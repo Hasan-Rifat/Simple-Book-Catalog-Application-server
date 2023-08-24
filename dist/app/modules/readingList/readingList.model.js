@@ -6,7 +6,6 @@ const mongoose_1 = require("mongoose");
 const ReadingListSchema = new mongoose_1.Schema({
     status: {
         type: Boolean,
-        default: false,
         required: true,
     },
     bookId: {

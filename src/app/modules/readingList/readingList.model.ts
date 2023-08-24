@@ -5,7 +5,6 @@ import { IReadingList, ReadingListModel } from './readingList.interface';
 const ReadingListSchema = new Schema<IReadingList, ReadingListModel>({
   status: {
     type: Boolean,
-    default: false,
     required: true,
   },
   bookId: {
