@@ -6,6 +6,7 @@ export type IReadingList = {
   status: boolean;
   bookId: Schema.Types.ObjectId | IBook;
   email: string;
+  _id: string;
 };
 
 export type ReadingListModel = Model<IReadingList, Record<string, unknown>>;

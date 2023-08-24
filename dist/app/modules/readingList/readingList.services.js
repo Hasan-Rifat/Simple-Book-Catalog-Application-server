@@ -27,10 +27,9 @@ const getSingleReadingList = (id) => __awaiter(void 0, void 0, void 0, function*
     const book = yield readingList_model_1.ReadingList.findById(id).populate('bookId');
     return book;
 });
-const updateReadingList = (email, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = payload.bookId;
+const updateReadingList = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
     // Use findOneAndUpdate to find and update the document.
-    const book = yield readingList_model_1.ReadingList.findOneAndUpdate({ email, bookId: id }, // Filter based on email and bookId
+    const book = yield readingList_model_1.ReadingList.findOneAndUpdate({ _id: id }, // Filter based on email and bookId
     payload, // Update payload
     {
         new: true, // To return the updated document
