@@ -68,8 +68,8 @@ const getSingleBook = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const book = yield book_model_1.Book.findById(id);
     return book;
 });
-const updateBook = (email, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const book = yield book_model_1.Book.updateOne({ email }, {
+const updateBook = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const book = yield book_model_1.Book.updateOne({ _id: id }, {
         $set: payload,
     }, { new: true });
     return book;

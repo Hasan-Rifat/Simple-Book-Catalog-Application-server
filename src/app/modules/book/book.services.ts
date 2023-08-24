@@ -57,11 +57,11 @@ const getSingleBook = async (id: string): Promise<IBook | null> => {
 };
 
 const updateBook = async (
-  email: string,
+  id: string,
   payload: IBook
 ): Promise<UpdateWriteOpResult> => {
   const book = await Book.updateOne(
-    { email },
+    { _id: id },
     {
       $set: payload,
     },

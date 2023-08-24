@@ -26,9 +26,5 @@ const bookSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
-    image: {
-        type: String,
-        required: true,
-    },
 });
 exports.Book = (0, mongoose_1.model)('Book', bookSchema);

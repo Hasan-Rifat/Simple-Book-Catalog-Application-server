@@ -12,6 +12,6 @@ const router = express_1.default.Router();
 router.get('/', book_controller_1.BookController.getAllBooks);
 router.post('/', (0, handleCastError_1.default)(book_validation_1.BookValidation.createBookZodSchema), book_controller_1.BookController.createBook);
 router.get('/:id', book_controller_1.BookController.getSingleBook);
-router.patch('/:email', (0, handleCastError_1.default)(book_validation_1.BookValidation.updateBookZodSchema), book_controller_1.BookController.updateBook);
+router.patch('/:id', (0, handleCastError_1.default)(book_validation_1.BookValidation.updateBookZodSchema), book_controller_1.BookController.updateBook);
 router.delete('/:id', book_controller_1.BookController.deleteBook);
 exports.BookRoutes = router;

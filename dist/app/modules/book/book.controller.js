@@ -48,7 +48,7 @@ const getSingleBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     });
 }));
 const updateBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield book_services_1.BookService.updateBook(req.params.email, req.body);
+    const result = yield book_services_1.BookService.updateBook(req.params.id, req.body);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
